@@ -14,6 +14,7 @@ const who = String.raw`
 # 社团对于网络安全知识学期尤为重视，经常组织各类社团内部赛，社团学习等。通过此类活动达到以赛促学，更好的帮助成员学习知识。
 
 # 更多信息请访问: <a href="https://www.didctf.com/docs/">https://www.didctf.com/docs/</a>
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #`;
 
 const honors = String.raw`
@@ -63,6 +64,17 @@ iCAN国际创新创业大赛中国总决赛 一等奖
 
 `;
 
+const friends = String.raw`
+
+我们的伙伴
+
+安阳工学院-AGCTF战队
+江苏连云港市讯岚网络科技工作室
+厦门市美亚柏科信息股份有限公司
+上海弘连网络科技有限公司
+
+`;
+
 let blink = document.querySelector('.blink');
 const code = document.querySelector('.code');
 
@@ -99,10 +111,10 @@ const DrawLines = async ( characters, min = 50, max = 500 ) => {
 
 const DrawCommands = async commands => {
 	for( const line of commands.split('\n')){
-		// Seperate the directory and the command
+		// 分离目录和命令
 		const [currentDir, command] = line.split(':~ ');
 
-		// Print the directory, type the command and finish with new line
+		// 打印目录，键入命令并以新行结束
 		RenderString(`${currentDir}:~ `);
 		await TypeString(command);
 		RenderString('\n');
@@ -110,7 +122,7 @@ const DrawCommands = async commands => {
 }
 
 
-// Start the code
+// 开始
 (async()=> {
 	await DrawCommands("/:~ ssh root@didctf.com");
 	await Delay(1000);
@@ -118,7 +130,7 @@ const DrawCommands = async commands => {
 	await Delay(2000);
 	RenderString("\n");
 	await DrawCommands(commands);
-	RenderString('\nWho_we_are.txt    honors.txt\n\n');
+	RenderString('\nWho_we_are.txt    honors.txt    friends.txt\n\n');
 	await DrawCommands('root@didctf.com/Hacker:~ cat Who_we_are.txt');
 	await DrawLines( who );
 	await TypeString("\n\nYou don't seem to be interested in the introduction of the society, so please take a look at our honors");
@@ -126,4 +138,8 @@ const DrawCommands = async commands => {
 	ResetTerminal();
     await DrawCommands('root@didctf.com/Hacker:~ cat honors.txt');
     await DrawLines(honors);
+    await Delay(7000);
+    ResetTerminal();
+    await DrawCommands('root@didctf.com/Hacker:~ cat friends.txt');
+    await DrawLines( friends );
 })();
