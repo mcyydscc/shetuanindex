@@ -207,7 +207,19 @@
 </div>
 <div class="footer">
 <div class="wrap">
-数据安全协创社团 © 2022 - 2023 All Rights Reserved.<br> Power by DIDCTF<br>
+<p id="login-footer" style="display : inline;"></p>
+  mounted () {
+    // 页脚年份实时更新
+    let p = document.getElementById('login-footer')
+    p.innerText = `数据安全协创社团 © 2021 - ${this.getNowYear()}  All Rights Reserved.`
+  },
+ 
+    getNowYear () {
+      let date = new Date()
+      return date.getFullYear()
+    },
+  <br> 
+Power by DIDCTF<br>
 </div>
 </div>
 <div class="totop">
